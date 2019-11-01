@@ -11,14 +11,13 @@
 //         })
 
 
+const cards = document.querySelector('.cards');
 
-// axios.get('https://api.github.com/users/NickAlicaya')
+axios.get('https://api.github.com/users/NickAlicaya')
 .then((response)=>{
-  // console.log(response);
-  // console.log(response.data);
-  const cards = document.querySelector('.cards')
-  let myInfo=response.data
-  // cards.appendChild(createCard(response.data));
+  const newCard =createCard(response.data)
+  cards.appendChild(newCard);
+  console.log(response)
    })
 
 .catch((error)=>{
@@ -35,50 +34,49 @@
            create a new component and add it to the DOM as a child of .cards
 */
 
-function createCard(object){
-    // function checkStr(str){
-    //   if(str){
-    //     return str;
-    //   }
-
-    // }
-
-  //elements
-  const newCard = document.createElement('div');
+function createCard(data){
+    
+  // elements
+  const card = document.createElement('div');
+  const cardData = document.createElement('div');
   const cardImg = document.createElement('img');
-  const cardName = document.createElement('h2');
+  const cardName = document.createElement('h3');
   const cardLogin = document.createElement('p');
   const cardUrl = document.createElement('a');
   const cardLocation = document.createElement('p');
   const cardFollowers = document.createElement('p');
   const cardFollowing = document.createElement('p');
+  const cardBio = document.createElement('p');
 
   //classes
-  newCard.classList.add('card');
+  card.classList.add('card');
   cardImg.classList.add('img');
   cardName.classList.add('name');
   cardLogin.classList.add('username');
 
   //structure
-  newCard.appendChild(cardImg)
-  newCard.appendChild(cardName);
-  newCard.appendChild(cardLogin);
-  newCard.appendChild(cardUrl);
-  newCard.appendChild(cardLocation);
-  newCard.appendChild(cardName);
-  newCard.appendChild(cardFollowers);
-  newCard.appendChild(cardFollowing);
+  card.appendChild(cardImg)
+  card.appendChild(cardData)
+  cardData.appendChild(cardName);
+  cardData.appendChild(cardLogin);
+  // cardData.appendChild(cardUrl);
+  cardData.appendChild(cardLocation);
+  cardData.appendChild(cardFollowers);
+  cardData.appendChild(cardFollowing);
+  cardData.appendChild(cardBio);
   
-  //content
-  // cardImg.src=myInfo.avatar_url;
-  // cardName=data.name;
-  // cardLogin=data.login;
-  // cardUrl=data.url;
-  // cardLocation=data.location;
-  // cardFollowers=data.followers;
-  // cardFollowing=data.following;
+  // content
+  cardImg.src=data.avatar_url;
+  cardName.textContent=data.name;
+  cardLogin.textContent=data.login;
+  // cardUrl.href=data.url;
+  // cardUrl.innerText='profile'
+  cardLocation.textContent=`Location: ${data.location}`;
+  cardFollowers.textContent=`Followers: ${data.followers}`;
+  cardFollowing.textContent=`Following: ${data.following}`;
+  cardBio.textContent=`Bio: ${data.bio}`;
 
-
+return card
 }
 
 /* Step 5: Now that you have your own card getting added to the DOM, either 
