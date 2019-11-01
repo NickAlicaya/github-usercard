@@ -91,6 +91,17 @@ return card
 
 const followersArray = ['squashgray','vtellez1','toddmurphy','bseverino','phil-mac'];
 
+followersArray.forEach(follower=>{
+  axios.get(`https://api.github.com/users/${follower}`)
+  .then(response=>{
+      let newCard = createCard(response.data);
+      cards.appendChild(newCard);
+
+  })
+  .catch((error)=>{
+    console.log('Error Detected', error);
+  })
+})
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
 
