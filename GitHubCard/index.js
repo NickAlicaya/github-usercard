@@ -42,6 +42,7 @@ function createCard(data){
   const cardImg = document.createElement('img');
   const cardName = document.createElement('h3');
   const cardLogin = document.createElement('p');
+  const cardProfile = document.createElement('p');
   const cardUrl = document.createElement('a');
   const cardLocation = document.createElement('p');
   const cardFollowers = document.createElement('p');
@@ -59,7 +60,8 @@ function createCard(data){
   card.appendChild(cardData)
   cardData.appendChild(cardName);
   cardData.appendChild(cardLogin);
-  // cardData.appendChild(cardUrl);
+  cardData.appendChild(cardProfile);
+  cardProfile.appendChild(cardUrl);
   cardData.appendChild(cardLocation);
   cardData.appendChild(cardFollowers);
   cardData.appendChild(cardFollowing);
@@ -69,8 +71,8 @@ function createCard(data){
   cardImg.src=data.avatar_url;
   cardName.textContent=data.name;
   cardLogin.textContent=data.login;
-  // cardUrl.href=data.url;
-  // cardUrl.innerText='profile'
+  cardUrl.textContent=`Profile: ${data.url}`;
+  cardUrl.href=data.url;
   cardLocation.textContent=`Location: ${data.location}`;
   cardFollowers.textContent=`Followers: ${data.followers}`;
   cardFollowing.textContent=`Following: ${data.following}`;
